@@ -17,5 +17,11 @@ public class Main {
         System.out.println("Name:" + customer.getName());
         System.out.println("Phone: " + customer.getPhone());
         System.out.println("Email: " + customer.getEmail());
+
+        Hotel hotel = new Hotel();
+        hotel.bookRoom(103, customer);
+        System.out.println("\nAfter booking:");
+        hotel.viewAvailableRooms();
+
     }
 }
