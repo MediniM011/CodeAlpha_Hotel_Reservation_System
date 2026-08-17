@@ -10,5 +10,12 @@ public class Main {
 
         room.setBooked(true);
         System.out.println("After Booking:" + room.isBooked());
+
+        Customer customer = new Customer("Medini", "7665477976", "medini@gmail.com");
+
+        System.out.println("-----------------------");
+        System.out.println("Name:" + customer.getName());
+        System.out.println("Phone: " + customer.getPhone());
+        System.out.println("Email: " + customer.getEmail());
     }
 }
