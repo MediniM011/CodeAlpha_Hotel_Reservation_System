@@ -23,6 +23,11 @@ public class Main {
             System.out.println("====================================");
 
             System.out.print("Enter your choice: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid inpot! Please enter a number");
+                scanner.next();
+                System.out.println("Enter your choice:");
+            }
             choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -36,21 +41,72 @@ public class Main {
 
                     System.out.println("\n===== BOOK A ROOM =====");
 
-                    System.out.print("Enter customer name: ");
-                    String name = scanner.nextLine();
+                    String name;
+                    while (true) {
+                        System.out.print("Enter customer name: ");
+                        name = scanner.nextLine().trim();
+                        if (!name.isEmpty()) {
+                            break;
+                        }
+                        System.out.println("Name cannot be empty. Please try again.");
+                    }
 
-                    System.out.print("Enter phone number: ");
-                    String phone = scanner.nextLine();
+                    String phone;
+                    while (true) {
+                        System.out.print("Enter phone number:");
+                        phone = scanner.nextLine().trim();
+                        if (phone.matches("\\d{10}")) {
+                            break;
+                        }
+                        System.out.println("Invaled phone number. Please enter exactly 10 digits.");
+                    }
 
-                    System.out.print("Enter email: ");
-                    String email = scanner.nextLine();
+                    String email;
+                    while (true) {
+                        System.out.print("Enetr email:");
+                        email = scanner.nextLine().trim();
+                        if (email.matches("^[A-Z a-z 0-9 + _ .]+@[A-Za-z0-9.-]+$")) {
+                            break;
+                        }
+                        System.out.println("Invalid email. Please enter a valid email address.");
+                    }
 
+                    int numberOfNights;
+                    while (true) {
+                        System.out.print("Enter number of nights:");
+                        if (scanner.hasNextInt()) {
+                            numberOfNights = scanner.nextInt();
+                            if (numberOfNights > 0) {
+                                break;
+                            }
+                            System.out.println("Number of nights must be greater than 0.");
+
+                        } else {
+                            System.out.println("Invalid input. please enter a valid number.");
+                            scanner.next();
+                        }
+                    }
+
+                    int roomNumber;
+                    while (true) {
+                        System.out.println("Enter room number:");
+                        if (scanner.hasNextInt()) {
+                            roomNumber = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (hotel.roomExists(roomNumber)) {
+                                break;
+                            }
+                            System.out.println("Invalid room number. Please choose a valid room.");
+                        } else {
+                            System.out.println("Invalid input. Please enter a valid room number.");
+                            scanner.next();
+                        }
+                    }
                     Customer customer = new Customer(name, phone, email);
 
-                    System.out.print("Enter room number: ");
-                    int roomNumber = scanner.nextInt();
+                    hotel.bookRoom(roomNumber, customer, numberOfNights);
 
-                    hotel.bookRoom(roomNumber, customer);
                     break;
 
                 case 3:

@@ -43,7 +43,7 @@ public class Hotel {
         }
     }
 
-    public void bookRoom(int roomNumber, Customer customer) {
+    public void bookRoom(int roomNumber, Customer customer, int numberOfNights) {
         for (Room room : rooms) {
             if (room.getRoomNumber() == roomNumber) {
                 if (room.isBooked()) {
@@ -51,7 +51,7 @@ public class Hotel {
                     return;
                 }
 
-                Booking booking = new Booking(customer, room);
+                Booking booking = new Booking(customer, room, numberOfNights);
 
                 bookings.add(booking);
                 room.setBooked(true);
@@ -129,5 +129,14 @@ public class Hotel {
         }
 
         System.out.println("No booking found for Room " + roomNumber);
+    }
+
+    public boolean roomExists(int roomNumber) {
+        for (Room room : rooms) {
+            if (room.getRoomNumber() == roomNumber) {
+                return true;
+            }
+        }
+        return false;
     }
 }
